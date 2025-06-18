@@ -1,0 +1,47 @@
+Implement and demonstrate FIND-S Algorithm for finding the most specific hypothesis based 
+
+on a given set of training data samples. Read the training data from a .CSV file.
+
+import csv
+
+hypothesis = [] # Initialize the most specific hypothesis
+
+# Read the training data
+
+with open('C:/Users/acer/Downloads/trainingdata.csv') as csv_file: 
+
+ reader = csv.reader(csv_file)
+
+ data = list(reader)
+
+print("The given training examples are:")
+
+for row in data:
+
+ print(row)
+
+# Filter only the positive examples (where the class label is 'Yes')
+
+positive_examples = [row for row in data if row[-1].strip().lower() == 'yes']
+
+print("\nThe positive examples are:")
+
+for example in positive_examples:
+
+ print(example)
+
+# Initialize the hypothesis as the first positive example (excluding the class label)
+
+hypothesis = positive_examples[0][:-1]
+
+for example in positive_examples: # Apply Find-S algorithm
+
+ for i in range(len(hypothesis)):
+
+ if hypothesis[i] != example[i]:
+
+ hypothesis[i] = ‘?’ # Generalize 
+
+print("\nThe maximally specific hypothesis is:") # Final result
+
+print(hypothesis)
